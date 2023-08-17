@@ -5,7 +5,7 @@ import './App.css';
 import TotalDisplay from './TotalDisplay';
 import CalcButton from './CalcButton';
 import reducer, {initialState} from '../reducers'; /* In order to have access to the reducer and state in the reducers file we needed to import Both Of them from the reducers file.*/ 
-import { addOne, applyNumber, operationChanger} from '../actions'; /* need acces to my created actions from the actions folder so they need to get imported into this file from there folder to be able to be used here in this code.  */
+import { addOne, applyNumber, operationChanger, displayClearer} from '../actions'; /* need acces to my created actions from the actions folder so they need to get imported into this file from there folder to be able to be used here in this code.  */
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState) /* useReducer has to be imported along with react. useReducer always gets [state, dislay]. the reducer function and state is made in the 'reducers' file. */
@@ -15,7 +15,11 @@ function App() {
   }
 
   const oppChanger = (operation) => {
-    dispatch(operationChanger(operation))
+    dispatch(operationChanger(operation));
+  }
+
+  const displayClear = () => {
+    dispatch(displayClearer());
   }
 
   return (
@@ -65,7 +69,7 @@ function App() {
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton value={"CE"} onClick={() => displayClear()}/>
             </div>
 
           </form>
